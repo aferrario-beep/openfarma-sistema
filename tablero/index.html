@@ -506,9 +506,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
         <div class="card" style="margin-bottom:0">
           <div class="card-title">
             <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
-            Pendientes registrados
+            Gestión de pendientes
           </div>
-          <div id="sv-pendientes"></div>
+          <div style="display:flex;gap:6px;margin-bottom:12px">
+            <button onclick="switchPendTab('abiertos',this)" id="ptab-abiertos" style="padding:5px 14px;border-radius:var(--radius);border:1px solid var(--green);background:var(--green);color:#fff;font-size:12px;font-weight:500;cursor:pointer">Abiertos</button>
+            <button onclick="switchPendTab('resueltos',this)" id="ptab-resueltos" style="padding:5px 14px;border-radius:var(--radius);border:1px solid var(--border);background:#fff;color:var(--text2);font-size:12px;font-weight:500;cursor:pointer">Resueltos</button>
+          </div>
+          <div id="sv-pend-abiertos"></div>
+          <div id="sv-pend-resueltos" style="display:none"></div>
         </div>
       </div>
       <div class="card">
@@ -1483,7 +1488,7 @@ function renderSvPage(svKey){
 
   // New sections
   renderSvAlertas(svKey);
-  renderSvEncargados(svKey);
+  renderSvPendientesGestion(svKey);
   renderSvAdminTbl(svKey);
   renderSvPositivos(svKey);
 }
@@ -1533,7 +1538,94 @@ function renderSvRanking(svKey){
   }).join('') || '<div class="empty">Sin datos</div>';
 }
 
-// ── HISTORIAL CHARTS ───────────────────────────────────────
+// ── GESTIÓN DE PENDIENTES ──────────────────────────────
+let allPendientes = []; // loaded from Sheets
+
+async function loadAllPendientes(){
+  try {
+    const res  = await fetch(SCRIPT_URL+'?action=getAllPendientes');
+    const text = await res.text();
+    const data = JSON.parse(text);
+    if(data.status==='ok') allPendientes = data.pendientes || [];
+  } catch(e){ console.warn('Error loading pendientes:', e); }
+}
+
+function switchPendTab(tab, btn){
+  document.querySelectorAll('#ptab-abiertos,#ptab-resueltos').forEach(b=>{
+    b.style.background='#fff'; b.style.color='var(--text2)'; b.style.borderColor='var(--border)';
+  });
+  btn.style.background='var(--green)'; btn.style.color='#fff'; btn.style.borderColor='var(--green)';
+  document.getElementById('sv-pend-abiertos').style.display = tab==='abiertos'?'block':'none';
+  document.getElementById('sv-pend-resueltos').style.display = tab==='resueltos'?'block':'none';
+}
+
+function renderSvPendientesGestion(svKey){
+  const svPend = allPendientes.filter(p=>p.sv===svKey);
+  const abiertos  = svPend.filter(p=>p.estado!=='Resuelto');
+  const resueltos = svPend.filter(p=>p.estado==='Resuelto');
+
+  // Abiertos
+  const elAb = document.getElementById('sv-pend-abiertos');
+  if(!elAb) return;
+  if(!abiertos.length){
+    elAb.innerHTML='<div class="empty">Sin pendientes abiertos 🎉</div>';
+  } else {
+    elAb.innerHTML = abiertos.map(p=>`
+      <div style="background:var(--bg);border-radius:var(--radius);padding:10px 12px;margin-bottom:8px;border-left:3px solid ${p.estado==='En proceso'?'var(--amber)':'var(--red)'}">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px">
+          <div style="flex:1">
+            <div style="font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px">${p.area}</div>
+            <div style="font-size:13px;color:var(--text);margin-bottom:3px">${p.texto}</div>
+            <div style="font-size:11px;color:var(--text3)">${p.sucursal} · ${fmtDate(p.fecha_visita)}</div>
+            ${p.estado==='En proceso'?'<span class="badge badge-warn" style="margin-top:4px;display:inline-block">En proceso</span>':''}
+          </div>
+          <button onclick="marcarResuelto('${p.id}','${svKey}')" style="padding:6px 12px;border-radius:var(--radius);border:1px solid var(--green);background:#fff;color:var(--green);font-size:12px;font-weight:500;cursor:pointer;white-space:nowrap;flex-shrink:0">✓ Resolver</button>
+        </div>
+      </div>`).join('');
+  }
+
+  // Resueltos
+  const elRes = document.getElementById('sv-pend-resueltos');
+  if(!elRes) return;
+  if(!resueltos.length){
+    elRes.innerHTML='<div class="empty">Sin pendientes resueltos aún</div>';
+  } else {
+    elRes.innerHTML = resueltos.map(p=>`
+      <div style="background:var(--green-light);border-radius:var(--radius);padding:10px 12px;margin-bottom:8px;border-left:3px solid var(--green-mid)">
+        <div style="font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px">${p.area}</div>
+        <div style="font-size:13px;color:var(--text);margin-bottom:3px">${p.texto}</div>
+        <div style="font-size:11px;color:var(--text3)">${p.sucursal} · Visita: ${fmtDate(p.fecha_visita)}</div>
+        <div style="font-size:11px;color:var(--green-dark);margin-top:3px">✓ Resuelto por ${p.resuelto_por} el ${fmtDate(p.fecha_resolucion)}</div>
+      </div>`).join('');
+  }
+}
+
+async function marcarResuelto(id, svKey){
+  if(!currentUser){ alert('Ingresá al sistema primero.'); return; }
+  const hoy = new Date().toISOString().split('T')[0];
+  const btn = event.target;
+  btn.textContent='...'; btn.disabled=true;
+  try {
+    const res  = await fetch(SCRIPT_URL, {
+      method:'POST',
+      body: JSON.stringify({action:'resolverPendiente', id, resuelto_por: currentUser.nombre, fecha_resolucion: hoy}),
+      redirect:'follow'
+    });
+    const text = await res.text();
+    const data = JSON.parse(text);
+    if(data.status==='ok'){
+      // Update local copy
+      const p = allPendientes.find(p=>String(p.id)===String(id));
+      if(p){ p.estado='Resuelto'; p.resuelto_por=currentUser.nombre; p.fecha_resolucion=hoy; }
+      renderSvPendientesGestion(svKey);
+    } else {
+      btn.textContent='✓ Resolver'; btn.disabled=false;
+      alert('Error al resolver: '+(data.msg||''));
+    }
+  } catch(e){
+    btn.textContent='✓ Resolver'; btn.disabled=false;
+  }
+}
 let histSvChart    = null;
 let histSucChart   = null;
 let svHistEvolChart= null;
@@ -1844,6 +1936,8 @@ async function syncFromSheets(){
     const json = JSON.parse(text.replace(/^[^(]+\(/, '').replace(/\);?$/, ''));
     const rows = json.table.rows || [];
     const nuevas = rows.map(parseSheetsRow).filter(Boolean);
+    // Also load pendientes
+    loadAllPendientes();
 
     // merge: sheets rows override matching localStorage rows
     nuevas.forEach(n=>{

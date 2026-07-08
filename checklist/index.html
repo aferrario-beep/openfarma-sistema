@@ -850,7 +850,9 @@ textarea{min-height:56px;resize:none;line-height:1.5}
         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
         <span>Pendientes por área</span>
       </div>
-      <div class="field-wrap"><div class="field-label">Abastecimiento</div><textarea id="om-abast" placeholder="Pendientes de abastecimiento..." style="min-height:56px"></textarea></div>
+      <div class="field-wrap"><div class="field-label">Abastecimiento Perfumería</div><textarea id="om-abast-perf" placeholder="Pendientes de abastecimiento perfumería..." style="min-height:56px"></textarea></div>
+      <div class="field-wrap"><div class="field-label">Abastecimiento Farmacia</div><textarea id="om-abast-farm" placeholder="Pendientes de abastecimiento farmacia..." style="min-height:56px"></textarea></div>
+      <div class="field-wrap"><div class="field-label">Área Comercial</div><textarea id="om-comercial" placeholder="Pendientes área comercial..." style="min-height:56px"></textarea></div>
       <div class="field-wrap"><div class="field-label">Administración</div><textarea id="om-admin" placeholder="Pendientes de administración..." style="min-height:56px"></textarea></div>
       <div class="field-wrap"><div class="field-label">Mantenimiento</div><textarea id="om-mant" placeholder="Pendientes de mantenimiento..." style="min-height:56px"></textarea></div>
       <div class="field-wrap"><div class="field-label">Marketing</div><textarea id="om-mkt" placeholder="Pendientes de marketing..." style="min-height:56px"></textarea></div>
@@ -1279,9 +1281,7 @@ function buildEmailBody(){
   if(obsAdmin) body += `  Comentarios: ${obsAdmin}\n`;
 
   body += `\n${sep}\nPENDIENTES POR ÁREA\n`;
-  [['Abastecimiento','om-abast'],['Administración','om-admin'],['Mantenimiento','om-mant'],
-   ['Marketing','om-mkt'],['Trade','om-trd'],['RRHH','om-rrhh'],['Sistemas','om-sis'],['Sucursal','om-suc']]
-  .forEach(([lbl,id])=>{ const v=document.getElementById(id)?.value?.trim(); if(v) body+=`  ${lbl}: ${v}\n`; });
+  MEJORAS_AREAS.forEach(({label,id})=>{ const v=document.getElementById(id)?.value?.trim(); if(v) body+=`  ${label}: ${v}\n`; });
 
   const puntosPos = document.getElementById('puntos-positivos')?.value?.trim();
   if(puntosPos){
@@ -1323,9 +1323,7 @@ function buildSheetsPayload(sv, suc, fecha){
     const label=v==='cumple'?'Cumple':v==='parcial'?'Parcial':v==='no'?'No cumple':v==='na'?'N/A':'—';
     return i+': '+label;
   }).join(' | ');
-  const mejoras = [['Abastecimiento','om-abast'],['Administración','om-admin'],['Mantenimiento','om-mant'],
-    ['Marketing','om-mkt'],['Trade','om-trd'],['RRHH','om-rrhh'],['Sistemas','om-sis'],['Sucursal','om-suc']]
-    .map(([l,id])=>{ const v=document.getElementById(id)?.value?.trim(); return v?l+': '+v:''; }).filter(Boolean).join(' | ');
+  const mejoras = MEJORAS_AREAS.map(({label,id})=>{ const v=document.getElementById(id)?.value?.trim(); return v?label+': '+v:''; }).filter(Boolean).join(' | ');
   const svMap = {'Ariel Tessio':'AT','Sebastián Cobreros':'SC','Graciela Giles':'GG','Julio Botta':'JB'};
   const enc   = document.getElementById('f-encargado').value.trim();
   const pp    = document.getElementById('puntos-positivos')?.value?.trim()||'';
@@ -1337,23 +1335,85 @@ function buildSheetsPayload(sv, suc, fecha){
 }
 
 // ── AREA EMAILS ──────────────────────────────────────────
-const AREA_EMAILS = { 'Operaciones': 'aferrario@openfarma.com.ar' };
-const MEJORAS_AREAS = [
-  {label:'Abastecimiento',id:'om-abast',area:'Operaciones'},{label:'Administración',id:'om-admin',area:'Operaciones'},
-  {label:'Mantenimiento',id:'om-mant',area:'Operaciones'},{label:'Marketing',id:'om-mkt',area:'Operaciones'},
-  {label:'Trade',id:'om-trd',area:'Operaciones'},{label:'RRHH',id:'om-rrhh',area:'Operaciones'},
-  {label:'Sistemas',id:'om-sis',area:'Operaciones'},{label:'Sucursal',id:'om-suc',area:'Operaciones'},
+const SV_EMAILS = {
+  'Ariel Tessio':      'atessio@openfarma.com.ar',
+  'Sebastián Cobreros':'scobreros@openfarma.com.ar',
+  'Graciela Giles':    'ggiles@openfarma.com.ar',
+  'Julio Botta':       'jbotta@openfarma.com.ar',
+};
+
+const AREA_EMAILS = {
+  'Abastecimiento Perfumería': 'ijauregui@openfarma.com.ar',
+  'Abastecimiento Farmacia':   'rduran@openfarma.com.ar',
+  'Área Comercial':            'epietanesi@openfarma.com.ar',
+  'Administración':            '__supervisor__',  // → supervisor + CC gerencia
+  'Mantenimiento':             'agalvez@openfarma.com.ar',
+  'Marketing':                 'marketing@openfarma.com.ar',
+  'Trade':                     'carinapires@openfarma.com.ar',
+  'RRHH':                      'lquintanilla@openfarma.com.ar',
+  'Sistemas':                  'pnuñez@openfarma.com.ar',
+  'Sucursal':                  '__supervisor__',  // → supervisor + CC gerencia
+};
+
+const AREAS_CONFIG = [
+  {label:'Abastecimiento Perfumería', id:'om-abast-perf'},
+  {label:'Abastecimiento Farmacia',   id:'om-abast-farm'},
+  {label:'Área Comercial',            id:'om-comercial'},
+  {label:'Administración',            id:'om-admin'},
+  {label:'Mantenimiento',             id:'om-mant'},
+  {label:'Marketing',                 id:'om-mkt'},
+  {label:'Trade',                     id:'om-trd'},
+  {label:'RRHH',                      id:'om-rrhh'},
+  {label:'Sistemas',                  id:'om-sis'},
+  {label:'Sucursal',                  id:'om-suc'},
 ];
-function buildAreaEmails(sv,suc,fecha){
-  const byArea={};
-  MEJORAS_AREAS.forEach(({label,id,area})=>{ const v=document.getElementById(id)?.value?.trim(); if(!v) return; if(!byArea[area]) byArea[area]=[]; byArea[area].push({label,texto:v}); });
-  return Object.entries(byArea).filter(([a])=>AREA_EMAILS[a]).map(([area,items])=>{
-    const sep='─'.repeat(40);
-    let msg=`PENDIENTES — ${area.toUpperCase()}\n${sep}\nSupervisor: ${sv}\nSucursal: ${suc}\nFecha: ${fecha}\n\n${sep}\nACCIONES PENDIENTES\n`;
-    items.forEach(i=>{ msg+=`  • ${i.label}: ${i.texto}\n`; });
-    msg+=`\n${sep}\nGenerado automáticamente por Openfarma Checklist.`;
-    return {to_email:AREA_EMAILS[area], subject:`Pendientes ${area} — ${suc} — ${fecha}`, message:msg, supervisor:sv, sucursal:suc, fecha};
+const MEJORAS_AREAS = [
+  {label:'Abastecimiento Perfumería', id:'om-abast-perf'},
+  {label:'Abastecimiento Farmacia',   id:'om-abast-farm'},
+  {label:'Área Comercial',            id:'om-comercial'},
+  {label:'Administración',            id:'om-admin'},
+  {label:'Mantenimiento',             id:'om-mant'},
+  {label:'Marketing',                 id:'om-mkt'},
+  {label:'Trade',                     id:'om-trd'},
+  {label:'RRHH',                      id:'om-rrhh'},
+  {label:'Sistemas',                  id:'om-sis'},
+  {label:'Sucursal',                  id:'om-suc'},
+];
+
+function buildAreaEmails(sv, suc, fecha){
+  const svEmail = SV_EMAILS[sv] || '';
+  const emails = [];
+  const sep = '─'.repeat(40);
+
+  MEJORAS_AREAS.forEach(({label, id}) => {
+    const v = document.getElementById(id)?.value?.trim();
+    if (!v) return;
+
+    const destino = AREA_EMAILS[label];
+    if (!destino) return;
+
+    const msg = `PENDIENTES — ${label.toUpperCase()}\n${sep}\nSupervisor: ${sv}\nSucursal: ${suc}\nFecha: ${fecha}\n\n${sep}\nACCIÓN PENDIENTE\n  ${v}\n\n${sep}\nGenerado automáticamente por Openfarma Checklist.`;
+
+    if (destino === '__supervisor__') {
+      // Administración y Sucursal → al supervisor con CC gerencia
+      if (svEmail) {
+        emails.push({
+          to_email: svEmail,
+          cc_email: 'aferrario@openfarma.com.ar',
+          subject: `Pendientes ${label} — ${suc} — ${fecha}`,
+          message: msg, supervisor: sv, sucursal: suc, fecha
+        });
+      }
+    } else {
+      // Resto de áreas → al responsable del área
+      emails.push({
+        to_email: destino,
+        subject: `Pendientes ${label} — ${suc} — ${fecha}`,
+        message: msg, supervisor: sv, sucursal: suc, fecha
+      });
+    }
   });
+  return emails;
 }
 
 // ── NAVIGATION ───────────────────────────────────────────
@@ -1440,13 +1500,6 @@ function updateProgress(step){
 }
 
 // ── SUBMIT ───────────────────────────────────────────────
-const SV_EMAILS = {
-  'Ariel Tessio':      'atessio@openfarma.com.ar',
-  'Sebastián Cobreros':'scobreros@openfarma.com.ar',
-  'Graciela Giles':    'ggiles@openfarma.com.ar',
-  'Julio Botta':       'jbotta@openfarma.com.ar',
-};
-
 function submitForm(){
   const btn=document.getElementById('btn-send');
   btn.textContent='Enviando...'; btn.classList.add('loading');

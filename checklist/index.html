@@ -950,7 +950,8 @@ async function onSucursalChange(){
 
   document.getElementById('panel-pendientes-loading').style.display='block';
   try {
-    const url = `${SHEETS_URL}?action=getPendientes&sucursal=${encodeURIComponent(suc)}`;
+    // Use new Pendientes sheet endpoint
+    const url = `${SHEETS_URL}?action=getPendientesSuc&sucursal=${encodeURIComponent(suc)}`;
     const res  = await fetch(url);
     const data = await res.json();
     document.getElementById('panel-pendientes-loading').style.display='none';
@@ -958,7 +959,7 @@ async function onSucursalChange(){
     if(data.status==='ok' && data.pendientes && data.pendientes.length>0){
       pendientesAnteriores = data.pendientes;
       pendientesEstado = {};
-      renderPendientesAnt(data.pendientes, data.fecha);
+      renderPendientesAnt(data.pendientes, null);
       document.getElementById('panel-pendientes-ant').style.display='block';
     } else {
       pendientesAnteriores = [];
@@ -1014,7 +1015,9 @@ function buildPendientesAntStr(){
   return pendientesAnteriores.map((p,i)=>{
     const est = pendientesEstado[i]||'sin_verificar';
     const estLabel = est==='resuelto'?'✓ Resuelto':est==='en_proceso'?'⚠ En proceso':est==='sin_resolver'?'✗ Sin resolver':'Sin verificar';
-    return `${p.area}: ${p.texto} [${estLabel}]`;
+    // Include ID if available (from Pendientes sheet)
+    const idPart = p.id ? `[id:${p.id}]` : '';
+    return `${p.area}: ${p.texto} [${estLabel}]${idPart}`;
   }).join(' | ');
 }
 // ── ENCARGADO ─────────────────────────────────────────────

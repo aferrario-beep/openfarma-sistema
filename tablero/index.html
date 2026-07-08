@@ -720,7 +720,27 @@ function scoreLabel(s){
 }
 function avg(arr){ const v=arr.filter(x=>x!==null); return v.length?Math.round(v.reduce((a,b)=>a+b,0)/v.length*10)/10:null; }
 function visitaAvg(v){ return avg(SEC_KEYS.map(k=>v.secciones[k]||null)); }
-function fmtDate(d){ const p=d.split('-'); return p[2]+'/'+p[1]+'/'+p[0]; }
+function fmtDate(d){
+  if(!d) return '—';
+  // Handle Google Sheets Date object format: Date(2026,5,17) — months are 0-indexed
+  if(typeof d === 'string' && d.startsWith('Date(')){
+    const parts = d.replace('Date(','').replace(')','').split(',');
+    const year=parts[0], month=String(parseInt(parts[1])+1).padStart(2,'0'), day=String(parts[2]).padStart(2,'0');
+    return `${day}/${month}/${year}`;
+  }
+  // Handle JS Date object
+  if(d instanceof Date){
+    return String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0')+'/'+d.getFullYear();
+  }
+  // Handle YYYY-MM-DD string
+  if(typeof d === 'string' && d.includes('-')){
+    const p=d.split('T')[0].split('-');
+    return p[2]+'/'+p[1]+'/'+p[0];
+  }
+  // Handle DD/MM/YYYY already
+  if(typeof d === 'string' && d.includes('/')) return d;
+  return String(d);
+}
 
 function svVisitas(svKey){ return visitas.filter(v=>v.sv===svKey).sort((a,b)=>b.fecha.localeCompare(a.fecha)); }
 function lastVisita(svKey){ const vv=svVisitas(svKey); return vv.length?vv[0]:null; }
@@ -1772,34 +1792,45 @@ function parseSheetsRow(row){
   const c = row.c;
   const val = (i) => (c[i]&&c[i].v!==null&&c[i].v!==undefined) ? c[i].v : null;
   const num  = (i) => { const v=val(i); return v!==null&&v!==''?parseFloat(v)||null:null; };
-  const str  = (i) => { const v=val(i); return v!==null?String(v).trim():''; };
+  const str  = (i) => {
+    const v=val(i);
+    if(v===null) return '';
+    // Handle Google Sheets Date object: Date(2026,5,17) — months 0-indexed
+    if(typeof v==='string' && v.startsWith('Date(')){
+      const parts=v.replace('Date(','').replace(')','').split(',');
+      const y=parts[0], m=String(parseInt(parts[1])+1).padStart(2,'0'), d=String(parts[2]).padStart(2,'0');
+      return `${y}-${m}-${d}`;
+    }
+    return String(v).trim();
+  };
 
-  const sv = str(0);
-  const sucursal = str(2);
-  const fecha = str(3);
-  if(!sv||!sucursal||!fecha) return null;
+  const sv      = str(0);
+  const sucursal= str(2);
+  const fechaRaw= str(3);
+  if(!sv||!sucursal||!fechaRaw) return null;
 
-  // parse obs into array
+  // Normalize fecha to YYYY-MM-DD
+  let fecha = fechaRaw;
+  if(fecha.includes('/')) fecha = fecha.split('/').reverse().join('-'); // DD/MM/YYYY → YYYY-MM-DD
+  fecha = fecha.replace(/\//g,'-');
+
   const obsRaw = str(10);
   const obs = obsRaw ? obsRaw.split(' | ').filter(Boolean) : [];
 
-  // parse pendientes into array of objects
   const pendRaw = str(11);
   const pendientes = pendRaw ? pendRaw.split(' | ').filter(Boolean).map(t=>({texto:t,tag:'tag-trd'})) : [];
 
-  // parse admin
   const adminRaw = str(12);
   const admin = {};
   if(adminRaw){ adminRaw.split(' | ').forEach(p=>{ const [k,v]=p.split(': '); if(k) admin[k.trim()]=v?.trim(); }); }
 
+  const ppRaw = str(13);
+
   return {
-    sv,
-    sucursal,
-    fecha: fecha.replace(/\//g,'-'),
+    sv, sucursal, fecha,
     secciones:{ s1:num(4), s2:num(5), s2b:num(6), s3:num(7), s4:num(8), s4b:num(9) },
-    obs,
-    pendientes,
-    admin,
+    obs, pendientes, admin,
+    puntos_positivos: ppRaw||'',
     _fromSheets: true,
   };
 }

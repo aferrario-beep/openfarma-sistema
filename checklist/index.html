@@ -1518,7 +1518,7 @@ function submitForm(){
     : Promise.resolve();
 
   const sheetsP = fetch(SHEETS_URL,{method:'POST',body:JSON.stringify(buildSheetsPayload(sv,suc,fecha))});
-  const areaPs  = buildAreaEmails(sv,suc,fecha).map(p=>emailjs.send('service_dz88h8u','template_zim7cpe',p));
+  const areaPs  = []; // emails por área desactivados hasta confirmación
 
   Promise.allSettled([emailP,svCopyP,sheetsP,...areaPs]).then(results=>{
     if(results[0].status==='fulfilled'||results[2].status==='fulfilled'){

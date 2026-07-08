@@ -282,6 +282,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
     <div class="topbar-title" id="topbar-title">Vista gerencial</div>
     <div class="topbar-right">
       <div class="topbar-date" id="topbar-date"></div>
+      <select id="filtro-periodo" onchange="aplicarFiltroPeriodo()" style="padding:7px 12px;border-radius:var(--radius);border:1px solid var(--border);font-size:13px;background:#fff;color:var(--text)">
+        <option value="">Todos los períodos</option>
+      </select>
       <button class="btn-import" onclick="openImport()">
         <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
         Cargar checklist
@@ -761,6 +764,35 @@ function toggleCard(bodyId, header){
 
 // ── FILTRO GLOBAL POR SUCURSAL ─────────────────────────
 let filtroSucursal = '';
+let filtroPeriodo = ''; // 'YYYY-MM' or ''
+
+function populateFiltroPeriodo(){
+  const sel = document.getElementById('filtro-periodo');
+  if(!sel) return;
+  const current = sel.value;
+  // Get unique months from all visitas
+  const meses = [...new Set(visitas.map(v=>{
+    const f = v.fecha ? String(v.fecha).substring(0,7) : null;
+    return f;
+  }).filter(Boolean))].sort().reverse();
+  
+  sel.innerHTML = '<option value="">Todos los períodos</option>';
+  meses.forEach(m=>{
+    const [y,mo] = m.split('-');
+    const nombres = ['','Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+    const label = `${nombres[parseInt(mo)]} ${y}`;
+    const o = document.createElement('option');
+    o.value = m; o.textContent = label; o.selected = (m === current);
+    sel.appendChild(o);
+  });
+}
+
+function aplicarFiltroPeriodo(){
+  filtroPeriodo = document.getElementById('filtro-periodo').value;
+  const page = document.querySelector('.page.show');
+  if(page && page.id==='page-supervisor' && currentSv) renderSvPage(currentSv);
+  else renderGerencial();
+}
 
 function getSucursalesPermitidas(){
   // En vista de supervisor: solo sus sucursales asignadas
@@ -816,10 +848,16 @@ function visitasFiltradas(vv){
     const permitidas = SUCURSALES[currentSv] || [];
     filtered = filtered.filter(v=>permitidas.includes(v.sucursal));
   }
+  // Period filter
+  if(filtroPeriodo){
+    filtered = filtered.filter(v=>v.fecha && String(v.fecha).startsWith(filtroPeriodo));
+  }
+  // Sucursal filter
   if(!filtroSucursal) return filtered;
   return filtered.filter(v=>v.sucursal===filtroSucursal);
 }
 function renderGerencial(){
+  populateFiltroPeriodo();
   populateFiltroSucursal();
   const vf = visitasFiltradas(visitas);
   renderResumenEjecutivo(vf);
@@ -1381,6 +1419,7 @@ function renderEvolGer(vf){
 
 // ── SUPERVISOR ─────────────────────────────────────────
 function renderSvPage(svKey){
+  populateFiltroPeriodo();
   populateFiltroSucursal();
   // Full data for KPIs (always show total context, not filtered)
   const vvAll = svVisitas(svKey);
@@ -1951,9 +1990,7 @@ async function syncFromSheets(){
     const text = await res.text();
     const json = JSON.parse(text.replace(/^[^(]+\(/, '').replace(/\);?$/, ''));
     const rows = json.table.rows || [];
-    const todas = rows.map(parseSheetsRow).filter(Boolean);
-    // Filter: only show visits from July 1st 2026 onwards
-    const nuevas = todas.filter(v => v.fecha >= '2026-07-01');
+    const nuevas = rows.map(parseSheetsRow).filter(Boolean);
     // Also load pendientes
     loadAllPendientes();
 

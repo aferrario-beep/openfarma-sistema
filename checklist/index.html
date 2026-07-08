@@ -1127,18 +1127,19 @@ function selectAdm(key, val, btn){
 // ── SCORING ─────────────────────────────────────────────
 function calcScore(){
   let total=0, count=0;
-  // Section items
+  // Section items — unanswered = 0 pts (counted)
   ALL_KEYS.forEach(k=>{
     const v = ratings[k];
-    if(!v||v==='na') return;
+    if(v==='na') return; // N/A explicitly excluded
     count++;
     if(v==='cumple') total+=100;
     else if(v==='parcial') total+=50;
+    // no answer or 'no' = 0
   });
   // Admin items
   ADMIN_ITEMS.forEach(item=>{
     const v = ratings['adm__'+item];
-    if(!v||v==='na') return;
+    if(v==='na') return;
     count++;
     if(v==='cumple') total+=100;
     else if(v==='parcial') total+=50;
@@ -1150,7 +1151,7 @@ function admScore(){
   let total=0, count=0;
   ADMIN_ITEMS.forEach(item=>{
     const v = ratings['adm__'+item];
-    if(!v||v==='na') return;
+    if(v==='na') return;
     count++;
     if(v==='cumple') total+=100;
     else if(v==='parcial') total+=50;
@@ -1159,18 +1160,11 @@ function admScore(){
 }
 
 function secScore(secKey){
-  const items = SECCIONES[secKey].items;
-  let total=0, count=0;
-  items.forEach(lbl=>{
-    // find key by label
-    const k = ALL_KEYS.find(k=>k.startsWith(secKey+'__'));
-    // we need all keys for this section
-  });
-  // better: iterate all keys for this section
   const secKeys = ALL_KEYS.filter(k=>k.startsWith(secKey+'__'));
+  let total=0, count=0;
   secKeys.forEach(k=>{
     const v=ratings[k];
-    if(!v||v==='na') return;
+    if(v==='na') return;
     count++;
     if(v==='cumple') total+=100;
     else if(v==='parcial') total+=50;

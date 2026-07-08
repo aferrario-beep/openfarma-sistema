@@ -1951,7 +1951,9 @@ async function syncFromSheets(){
     const text = await res.text();
     const json = JSON.parse(text.replace(/^[^(]+\(/, '').replace(/\);?$/, ''));
     const rows = json.table.rows || [];
-    const nuevas = rows.map(parseSheetsRow).filter(Boolean);
+    const todas = rows.map(parseSheetsRow).filter(Boolean);
+    // Filter: only show visits from July 1st 2026 onwards
+    const nuevas = todas.filter(v => v.fecha >= '2026-07-01');
     // Also load pendientes
     loadAllPendientes();
 

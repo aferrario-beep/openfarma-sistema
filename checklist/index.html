@@ -114,6 +114,7 @@ textarea{min-height:56px;resize:none;line-height:1.5}
 .cpc-btn:active{transform:scale(.95)}
 .cpc-cumple.selected{background:#dff0e5;color:#085041;border-color:#7AB234}
 .cpc-parcial.selected{background:#fef0e0;color:#6b3800;border-color:#EF9F27}
+.cpc-range{display:block;font-size:9px;font-weight:400;opacity:.7;margin-top:1px}
 .cpc-no.selected{background:#fde8e8;color:#7a1a1a;border-color:#E24B4A}
 .cpc-na.selected{background:#f0eeeb;color:#5a5a5a;border-color:#999}
 
@@ -319,9 +320,9 @@ textarea{min-height:56px;resize:none;line-height:1.5}
     <button class="crit-toggle" onclick="toggleCrit('s1__graf')" aria-label="Ver criterios">?</button>
   </div>
   <div class="cpc-row">
-    <button class="cpc-btn cpc-cumple" onclick="selectCPC('s1__graf','cumple',this)">✓ Cumple</button>
-    <button class="cpc-btn cpc-parcial" onclick="selectCPC('s1__graf','parcial',this)">⚠ Parcial</button>
-    <button class="cpc-btn cpc-no" onclick="selectCPC('s1__graf','no',this)">✗ No cumple</button>
+    <button class="cpc-btn cpc-cumple" onclick="selectCPC('s1__graf','cumple',this)">✓ Cumple<span class="cpc-range">85-100</span></button>
+    <button class="cpc-btn cpc-parcial" onclick="selectCPC('s1__graf','parcial',this)">⚠ Parcial<span class="cpc-range">50-84</span></button>
+    <button class="cpc-btn cpc-no" onclick="selectCPC('s1__graf','no',this)">✗ No cumple<span class="cpc-range">0-49</span></button>
     <button class="cpc-btn cpc-na" onclick="selectCPC('s1__graf','na',this)">N/A</button>
   </div>
   <div class="obs-field"><div class="obs-hint">⚠ Describí el problema observado (obligatorio)</div><textarea placeholder="Describí qué se observó..." maxlength="300"></textarea></div>
@@ -337,9 +338,9 @@ textarea{min-height:56px;resize:none;line-height:1.5}
     <button class="crit-toggle" onclick="toggleCrit('s1__ilu')" aria-label="Ver criterios">?</button>
   </div>
   <div class="cpc-row">
-    <button class="cpc-btn cpc-cumple" onclick="selectCPC('s1__ilu','cumple',this)">✓ Cumple</button>
-    <button class="cpc-btn cpc-parcial" onclick="selectCPC('s1__ilu','parcial',this)">⚠ Parcial</button>
-    <button class="cpc-btn cpc-no" onclick="selectCPC('s1__ilu','no',this)">✗ No cumple</button>
+    <button class="cpc-btn cpc-cumple" onclick="selectCPC('s1__ilu','cumple',this)">✓ Cumple<span class="cpc-range">85-100</span></button>
+    <button class="cpc-btn cpc-parcial" onclick="selectCPC('s1__ilu','parcial',this)">⚠ Parcial<span class="cpc-range">50-84</span></button>
+    <button class="cpc-btn cpc-no" onclick="selectCPC('s1__ilu','no',this)">✗ No cumple<span class="cpc-range">0-49</span></button>
     <button class="cpc-btn cpc-na" onclick="selectCPC('s1__ilu','na',this)">N/A</button>
   </div>
   <div class="obs-field"><div class="obs-hint">⚠ Describí el problema observado (obligatorio)</div><textarea placeholder="Describí qué se observó..." maxlength="300"></textarea></div>
@@ -355,9 +356,9 @@ textarea{min-height:56px;resize:none;line-height:1.5}
     <button class="crit-toggle" onclick="toggleCrit('s1__marq')" aria-label="Ver criterios">?</button>
   </div>
   <div class="cpc-row">
-    <button class="cpc-btn cpc-cumple" onclick="selectCPC('s1__marq','cumple',this)">✓ Cumple</button>
-    <button class="cpc-btn cpc-parcial" onclick="selectCPC('s1__marq','parcial',this)">⚠ Parcial</button>
-    <button class="cpc-btn cpc-no" onclick="selectCPC('s1__marq','no',this)">✗ No cumple</button>
+    <button class="cpc-btn cpc-cumple" onclick="selectCPC('s1__marq','cumple',this)">✓ Cumple<span class="cpc-range">85-100</span></button>
+    <button class="cpc-btn cpc-parcial" onclick="selectCPC('s1__marq','parcial',this)">⚠ Parcial<span class="cpc-range">50-84</span></button>
+    <button class="cpc-btn cpc-no" onclick="selectCPC('s1__marq','no',this)">✗ No cumple<span class="cpc-range">0-49</span></button>
     <button class="cpc-btn cpc-na" onclick="selectCPC('s1__marq','na',this)">N/A</button>
   </div>
   <div class="obs-field"><div class="obs-hint">⚠ Describí el problema observado (obligatorio)</div><textarea placeholder="Describí qué se observó..." maxlength="300"></textarea></div>
@@ -373,9 +374,9 @@ textarea{min-height:56px;resize:none;line-height:1.5}
     <button class="crit-toggle" onclick="toggleCrit('s1__turn')" aria-label="Ver criterios">?</button>
   </div>
   <div class="cpc-row">
-    <button class="cpc-btn cpc-cumple" onclick="selectCPC('s1__turn','cumple',this)">✓ Cumple</button>
-    <button class="cpc-btn cpc-parcial" onclick="selectCPC('s1__turn','parcial',this)">⚠ Parcial</button>
-    <button class="cpc-btn cpc-no" onclick="selectCPC('s1__turn','no',this)">✗ No cumple</button>
+    <button class="cpc-btn cpc-cumple" onclick="selectCPC('s1__turn','cumple',this)">✓ Cumple<span class="cpc-range">85-100</span></button>
+    <button class="cpc-btn cpc-parcial" onclick="selectCPC('s1__turn','parcial',this)">⚠ Parcial<span class="cpc-range">50-84</span></button>
+    <button class="cpc-btn cpc-no" onclick="selectCPC('s1__turn','no',this)">✗ No cumple<span class="cpc-range">0-49</span></button>
     <button class="cpc-btn cpc-na" onclick="selectCPC('s1__turn','na',this)">N/A</button>
   </div>
   <div class="obs-field"><div class="obs-hint">⚠ Describí el problema observado (obligatorio)</div><textarea placeholder="Describí qué se observó..." maxlength="300"></textarea></div>
@@ -414,9 +415,9 @@ textarea{min-height:56px;resize:none;line-height:1.5}
     <button class="crit-toggle" onclick="toggleCrit('s2__exh')" aria-label="Ver criterios">?</button>
   </div>
   <div class="cpc-row">
-    <button class="cpc-btn cpc-cumple" onclick="selectCPC('s2__exh','cumple',this)">✓ Cumple</button>
-    <button class="cpc-btn cpc-parcial" onclick="selectCPC('s2__exh','parcial',this)">⚠ Parcial</button>
-    <button class="cpc-btn cpc-no" onclick="selectCPC('s2__exh','no',this)">✗ No cumple</button>
+    <button class="cpc-btn cpc-cumple" onclick="selectCPC('s2__exh','cumple',this)">✓ Cumple<span class="cpc-range">85-100</span></button>
+    <button class="cpc-btn cpc-parcial" onclick="selectCPC('s2__exh','parcial',this)">⚠ Parcial<span class="cpc-range">50-84</span></button>
+    <button class="cpc-btn cpc-no" onclick="selectCPC('s2__exh','no',this)">✗ No cumple<span class="cpc-range">0-49</span></button>
     <button class="cpc-btn cpc-na" onclick="selectCPC('s2__exh','na',this)">N/A</button>
   </div>
   <div class="obs-field"><div class="obs-hint">⚠ Describí el problema observado (obligatorio)</div><textarea placeholder="Describí qué se observó..." maxlength="300"></textarea></div>
@@ -432,9 +433,9 @@ textarea{min-height:56px;resize:none;line-height:1.5}
     <button class="crit-toggle" onclick="toggleCrit('s2__pop')" aria-label="Ver criterios">?</button>
   </div>
   <div class="cpc-row">
-    <button class="cpc-btn cpc-cumple" onclick="selectCPC('s2__pop','cumple',this)">✓ Cumple</button>
-    <button class="cpc-btn cpc-parcial" onclick="selectCPC('s2__pop','parcial',this)">⚠ Parcial</button>
-    <button class="cpc-btn cpc-no" onclick="selectCPC('s2__pop','no',this)">✗ No cumple</button>
+    <button class="cpc-btn cpc-cumple" onclick="selectCPC('s2__pop','cumple',this)">✓ Cumple<span class="cpc-range">85-100</span></button>
+    <button class="cpc-btn cpc-parcial" onclick="selectCPC('s2__pop','parcial',this)">⚠ Parcial<span class="cpc-range">50-84</span></button>
+    <button class="cpc-btn cpc-no" onclick="selectCPC('s2__pop','no',this)">✗ No cumple<span class="cpc-range">0-49</span></button>
     <button class="cpc-btn cpc-na" onclick="selectCPC('s2__pop','na',this)">N/A</button>
   </div>
   <div class="obs-field"><div class="obs-hint">⚠ Describí el problema observado (obligatorio)</div><textarea placeholder="Describí qué se observó..." maxlength="300"></textarea></div>
@@ -450,9 +451,9 @@ textarea{min-height:56px;resize:none;line-height:1.5}
     <button class="crit-toggle" onclick="toggleCrit('s2__prec')" aria-label="Ver criterios">?</button>
   </div>
   <div class="cpc-row">
-    <button class="cpc-btn cpc-cumple" onclick="selectCPC('s2__prec','cumple',this)">✓ Cumple</button>
-    <button class="cpc-btn cpc-parcial" onclick="selectCPC('s2__prec','parcial',this)">⚠ Parcial</button>
-    <button class="cpc-btn cpc-no" onclick="selectCPC('s2__prec','no',this)">✗ No cumple</button>
+    <button class="cpc-btn cpc-cumple" onclick="selectCPC('s2__prec','cumple',this)">✓ Cumple<span class="cpc-range">85-100</span></button>
+    <button class="cpc-btn cpc-parcial" onclick="selectCPC('s2__prec','parcial',this)">⚠ Parcial<span class="cpc-range">50-84</span></button>
+    <button class="cpc-btn cpc-no" onclick="selectCPC('s2__prec','no',this)">✗ No cumple<span class="cpc-range">0-49</span></button>
     <button class="cpc-btn cpc-na" onclick="selectCPC('s2__prec','na',this)">N/A</button>
   </div>
   <div class="obs-field"><div class="obs-hint">⚠ Describí el problema observado (obligatorio)</div><textarea placeholder="Describí qué se observó..." maxlength="300"></textarea></div>
@@ -468,9 +469,9 @@ textarea{min-height:56px;resize:none;line-height:1.5}
     <button class="crit-toggle" onclick="toggleCrit('s2__gon')" aria-label="Ver criterios">?</button>
   </div>
   <div class="cpc-row">
-    <button class="cpc-btn cpc-cumple" onclick="selectCPC('s2__gon','cumple',this)">✓ Cumple</button>
-    <button class="cpc-btn cpc-parcial" onclick="selectCPC('s2__gon','parcial',this)">⚠ Parcial</button>
-    <button class="cpc-btn cpc-no" onclick="selectCPC('s2__gon','no',this)">✗ No cumple</button>
+    <button class="cpc-btn cpc-cumple" onclick="selectCPC('s2__gon','cumple',this)">✓ Cumple<span class="cpc-range">85-100</span></button>
+    <button class="cpc-btn cpc-parcial" onclick="selectCPC('s2__gon','parcial',this)">⚠ Parcial<span class="cpc-range">50-84</span></button>
+    <button class="cpc-btn cpc-no" onclick="selectCPC('s2__gon','no',this)">✗ No cumple<span class="cpc-range">0-49</span></button>
     <button class="cpc-btn cpc-na" onclick="selectCPC('s2__gon','na',this)">N/A</button>
   </div>
   <div class="obs-field"><div class="obs-hint">⚠ Describí el problema observado (obligatorio)</div><textarea placeholder="Describí qué se observó..." maxlength="300"></textarea></div>
@@ -486,9 +487,9 @@ textarea{min-height:56px;resize:none;line-height:1.5}
     <button class="crit-toggle" onclick="toggleCrit('s2__esp')" aria-label="Ver criterios">?</button>
   </div>
   <div class="cpc-row">
-    <button class="cpc-btn cpc-cumple" onclick="selectCPC('s2__esp','cumple',this)">✓ Cumple</button>
-    <button class="cpc-btn cpc-parcial" onclick="selectCPC('s2__esp','parcial',this)">⚠ Parcial</button>
-    <button class="cpc-btn cpc-no" onclick="selectCPC('s2__esp','no',this)">✗ No cumple</button>
+    <button class="cpc-btn cpc-cumple" onclick="selectCPC('s2__esp','cumple',this)">✓ Cumple<span class="cpc-range">85-100</span></button>
+    <button class="cpc-btn cpc-parcial" onclick="selectCPC('s2__esp','parcial',this)">⚠ Parcial<span class="cpc-range">50-84</span></button>
+    <button class="cpc-btn cpc-no" onclick="selectCPC('s2__esp','no',this)">✗ No cumple<span class="cpc-range">0-49</span></button>
     <button class="cpc-btn cpc-na" onclick="selectCPC('s2__esp','na',this)">N/A</button>
   </div>
   <div class="obs-field"><div class="obs-hint">⚠ Describí el problema observado (obligatorio)</div><textarea placeholder="Describí qué se observó..." maxlength="300"></textarea></div>
@@ -504,9 +505,9 @@ textarea{min-height:56px;resize:none;line-height:1.5}
     <button class="crit-toggle" onclick="toggleCrit('s2__ord')" aria-label="Ver criterios">?</button>
   </div>
   <div class="cpc-row">
-    <button class="cpc-btn cpc-cumple" onclick="selectCPC('s2__ord','cumple',this)">✓ Cumple</button>
-    <button class="cpc-btn cpc-parcial" onclick="selectCPC('s2__ord','parcial',this)">⚠ Parcial</button>
-    <button class="cpc-btn cpc-no" onclick="selectCPC('s2__ord','no',this)">✗ No cumple</button>
+    <button class="cpc-btn cpc-cumple" onclick="selectCPC('s2__ord','cumple',this)">✓ Cumple<span class="cpc-range">85-100</span></button>
+    <button class="cpc-btn cpc-parcial" onclick="selectCPC('s2__ord','parcial',this)">⚠ Parcial<span class="cpc-range">50-84</span></button>
+    <button class="cpc-btn cpc-no" onclick="selectCPC('s2__ord','no',this)">✗ No cumple<span class="cpc-range">0-49</span></button>
     <button class="cpc-btn cpc-na" onclick="selectCPC('s2__ord','na',this)">N/A</button>
   </div>
   <div class="obs-field"><div class="obs-hint">⚠ Describí el problema observado (obligatorio)</div><textarea placeholder="Describí qué se observó..." maxlength="300"></textarea></div>
@@ -530,9 +531,9 @@ textarea{min-height:56px;resize:none;line-height:1.5}
     <button class="crit-toggle" onclick="toggleCrit('s2b__eqv')" aria-label="Ver criterios">?</button>
   </div>
   <div class="cpc-row">
-    <button class="cpc-btn cpc-cumple" onclick="selectCPC('s2b__eqv','cumple',this)">✓ Cumple</button>
-    <button class="cpc-btn cpc-parcial" onclick="selectCPC('s2b__eqv','parcial',this)">⚠ Parcial</button>
-    <button class="cpc-btn cpc-no" onclick="selectCPC('s2b__eqv','no',this)">✗ No cumple</button>
+    <button class="cpc-btn cpc-cumple" onclick="selectCPC('s2b__eqv','cumple',this)">✓ Cumple<span class="cpc-range">85-100</span></button>
+    <button class="cpc-btn cpc-parcial" onclick="selectCPC('s2b__eqv','parcial',this)">⚠ Parcial<span class="cpc-range">50-84</span></button>
+    <button class="cpc-btn cpc-no" onclick="selectCPC('s2b__eqv','no',this)">✗ No cumple<span class="cpc-range">0-49</span></button>
     <button class="cpc-btn cpc-na" onclick="selectCPC('s2b__eqv','na',this)">N/A</button>
   </div>
   <div class="obs-field"><div class="obs-hint">⚠ Describí el problema observado (obligatorio)</div><textarea placeholder="Describí qué se observó..." maxlength="300"></textarea></div>
@@ -548,9 +549,9 @@ textarea{min-height:56px;resize:none;line-height:1.5}
     <button class="crit-toggle" onclick="toggleCrit('s2b__ilu2')" aria-label="Ver criterios">?</button>
   </div>
   <div class="cpc-row">
-    <button class="cpc-btn cpc-cumple" onclick="selectCPC('s2b__ilu2','cumple',this)">✓ Cumple</button>
-    <button class="cpc-btn cpc-parcial" onclick="selectCPC('s2b__ilu2','parcial',this)">⚠ Parcial</button>
-    <button class="cpc-btn cpc-no" onclick="selectCPC('s2b__ilu2','no',this)">✗ No cumple</button>
+    <button class="cpc-btn cpc-cumple" onclick="selectCPC('s2b__ilu2','cumple',this)">✓ Cumple<span class="cpc-range">85-100</span></button>
+    <button class="cpc-btn cpc-parcial" onclick="selectCPC('s2b__ilu2','parcial',this)">⚠ Parcial<span class="cpc-range">50-84</span></button>
+    <button class="cpc-btn cpc-no" onclick="selectCPC('s2b__ilu2','no',this)">✗ No cumple<span class="cpc-range">0-49</span></button>
     <button class="cpc-btn cpc-na" onclick="selectCPC('s2b__ilu2','na',this)">N/A</button>
   </div>
   <div class="obs-field"><div class="obs-hint">⚠ Describí el problema observado (obligatorio)</div><textarea placeholder="Describí qué se observó..." maxlength="300"></textarea></div>
@@ -566,9 +567,9 @@ textarea{min-height:56px;resize:none;line-height:1.5}
     <button class="crit-toggle" onclick="toggleCrit('s2b__sen')" aria-label="Ver criterios">?</button>
   </div>
   <div class="cpc-row">
-    <button class="cpc-btn cpc-cumple" onclick="selectCPC('s2b__sen','cumple',this)">✓ Cumple</button>
-    <button class="cpc-btn cpc-parcial" onclick="selectCPC('s2b__sen','parcial',this)">⚠ Parcial</button>
-    <button class="cpc-btn cpc-no" onclick="selectCPC('s2b__sen','no',this)">✗ No cumple</button>
+    <button class="cpc-btn cpc-cumple" onclick="selectCPC('s2b__sen','cumple',this)">✓ Cumple<span class="cpc-range">85-100</span></button>
+    <button class="cpc-btn cpc-parcial" onclick="selectCPC('s2b__sen','parcial',this)">⚠ Parcial<span class="cpc-range">50-84</span></button>
+    <button class="cpc-btn cpc-no" onclick="selectCPC('s2b__sen','no',this)">✗ No cumple<span class="cpc-range">0-49</span></button>
     <button class="cpc-btn cpc-na" onclick="selectCPC('s2b__sen','na',this)">N/A</button>
   </div>
   <div class="obs-field"><div class="obs-hint">⚠ Describí el problema observado (obligatorio)</div><textarea placeholder="Describí qué se observó..." maxlength="300"></textarea></div>
@@ -584,9 +585,9 @@ textarea{min-height:56px;resize:none;line-height:1.5}
     <button class="crit-toggle" onclick="toggleCrit('s2b__lin')" aria-label="Ver criterios">?</button>
   </div>
   <div class="cpc-row">
-    <button class="cpc-btn cpc-cumple" onclick="selectCPC('s2b__lin','cumple',this)">✓ Cumple</button>
-    <button class="cpc-btn cpc-parcial" onclick="selectCPC('s2b__lin','parcial',this)">⚠ Parcial</button>
-    <button class="cpc-btn cpc-no" onclick="selectCPC('s2b__lin','no',this)">✗ No cumple</button>
+    <button class="cpc-btn cpc-cumple" onclick="selectCPC('s2b__lin','cumple',this)">✓ Cumple<span class="cpc-range">85-100</span></button>
+    <button class="cpc-btn cpc-parcial" onclick="selectCPC('s2b__lin','parcial',this)">⚠ Parcial<span class="cpc-range">50-84</span></button>
+    <button class="cpc-btn cpc-no" onclick="selectCPC('s2b__lin','no',this)">✗ No cumple<span class="cpc-range">0-49</span></button>
     <button class="cpc-btn cpc-na" onclick="selectCPC('s2b__lin','na',this)">N/A</button>
   </div>
   <div class="obs-field"><div class="obs-hint">⚠ Describí el problema observado (obligatorio)</div><textarea placeholder="Describí qué se observó..." maxlength="300"></textarea></div>
@@ -602,9 +603,9 @@ textarea{min-height:56px;resize:none;line-height:1.5}
     <button class="crit-toggle" onclick="toggleCrit('s2b__ord2')" aria-label="Ver criterios">?</button>
   </div>
   <div class="cpc-row">
-    <button class="cpc-btn cpc-cumple" onclick="selectCPC('s2b__ord2','cumple',this)">✓ Cumple</button>
-    <button class="cpc-btn cpc-parcial" onclick="selectCPC('s2b__ord2','parcial',this)">⚠ Parcial</button>
-    <button class="cpc-btn cpc-no" onclick="selectCPC('s2b__ord2','no',this)">✗ No cumple</button>
+    <button class="cpc-btn cpc-cumple" onclick="selectCPC('s2b__ord2','cumple',this)">✓ Cumple<span class="cpc-range">85-100</span></button>
+    <button class="cpc-btn cpc-parcial" onclick="selectCPC('s2b__ord2','parcial',this)">⚠ Parcial<span class="cpc-range">50-84</span></button>
+    <button class="cpc-btn cpc-no" onclick="selectCPC('s2b__ord2','no',this)">✗ No cumple<span class="cpc-range">0-49</span></button>
     <button class="cpc-btn cpc-na" onclick="selectCPC('s2b__ord2','na',this)">N/A</button>
   </div>
   <div class="obs-field"><div class="obs-hint">⚠ Describí el problema observado (obligatorio)</div><textarea placeholder="Describí qué se observó..." maxlength="300"></textarea></div>
@@ -643,9 +644,9 @@ textarea{min-height:56px;resize:none;line-height:1.5}
     <button class="crit-toggle" onclick="toggleCrit('s3__trn')" aria-label="Ver criterios">?</button>
   </div>
   <div class="cpc-row">
-    <button class="cpc-btn cpc-cumple" onclick="selectCPC('s3__trn','cumple',this)">✓ Cumple</button>
-    <button class="cpc-btn cpc-parcial" onclick="selectCPC('s3__trn','parcial',this)">⚠ Parcial</button>
-    <button class="cpc-btn cpc-no" onclick="selectCPC('s3__trn','no',this)">✗ No cumple</button>
+    <button class="cpc-btn cpc-cumple" onclick="selectCPC('s3__trn','cumple',this)">✓ Cumple<span class="cpc-range">85-100</span></button>
+    <button class="cpc-btn cpc-parcial" onclick="selectCPC('s3__trn','parcial',this)">⚠ Parcial<span class="cpc-range">50-84</span></button>
+    <button class="cpc-btn cpc-no" onclick="selectCPC('s3__trn','no',this)">✗ No cumple<span class="cpc-range">0-49</span></button>
     <button class="cpc-btn cpc-na" onclick="selectCPC('s3__trn','na',this)">N/A</button>
   </div>
   <div class="obs-field"><div class="obs-hint">⚠ Describí el problema observado (obligatorio)</div><textarea placeholder="Describí qué se observó..." maxlength="300"></textarea></div>
@@ -661,9 +662,9 @@ textarea{min-height:56px;resize:none;line-height:1.5}
     <button class="crit-toggle" onclick="toggleCrit('s3__dem')" aria-label="Ver criterios">?</button>
   </div>
   <div class="cpc-row">
-    <button class="cpc-btn cpc-cumple" onclick="selectCPC('s3__dem','cumple',this)">✓ Cumple</button>
-    <button class="cpc-btn cpc-parcial" onclick="selectCPC('s3__dem','parcial',this)">⚠ Parcial</button>
-    <button class="cpc-btn cpc-no" onclick="selectCPC('s3__dem','no',this)">✗ No cumple</button>
+    <button class="cpc-btn cpc-cumple" onclick="selectCPC('s3__dem','cumple',this)">✓ Cumple<span class="cpc-range">85-100</span></button>
+    <button class="cpc-btn cpc-parcial" onclick="selectCPC('s3__dem','parcial',this)">⚠ Parcial<span class="cpc-range">50-84</span></button>
+    <button class="cpc-btn cpc-no" onclick="selectCPC('s3__dem','no',this)">✗ No cumple<span class="cpc-range">0-49</span></button>
     <button class="cpc-btn cpc-na" onclick="selectCPC('s3__dem','na',this)">N/A</button>
   </div>
   <div class="obs-field"><div class="obs-hint">⚠ Describí el problema observado (obligatorio)</div><textarea placeholder="Describí qué se observó..." maxlength="300"></textarea></div>
@@ -679,9 +680,9 @@ textarea{min-height:56px;resize:none;line-height:1.5}
     <button class="crit-toggle" onclick="toggleCrit('s3__ofe')" aria-label="Ver criterios">?</button>
   </div>
   <div class="cpc-row">
-    <button class="cpc-btn cpc-cumple" onclick="selectCPC('s3__ofe','cumple',this)">✓ Cumple</button>
-    <button class="cpc-btn cpc-parcial" onclick="selectCPC('s3__ofe','parcial',this)">⚠ Parcial</button>
-    <button class="cpc-btn cpc-no" onclick="selectCPC('s3__ofe','no',this)">✗ No cumple</button>
+    <button class="cpc-btn cpc-cumple" onclick="selectCPC('s3__ofe','cumple',this)">✓ Cumple<span class="cpc-range">85-100</span></button>
+    <button class="cpc-btn cpc-parcial" onclick="selectCPC('s3__ofe','parcial',this)">⚠ Parcial<span class="cpc-range">50-84</span></button>
+    <button class="cpc-btn cpc-no" onclick="selectCPC('s3__ofe','no',this)">✗ No cumple<span class="cpc-range">0-49</span></button>
     <button class="cpc-btn cpc-na" onclick="selectCPC('s3__ofe','na',this)">N/A</button>
   </div>
   <div class="obs-field"><div class="obs-hint">⚠ Describí el problema observado (obligatorio)</div><textarea placeholder="Describí qué se observó..." maxlength="300"></textarea></div>
@@ -697,9 +698,9 @@ textarea{min-height:56px;resize:none;line-height:1.5}
     <button class="crit-toggle" onclick="toggleCrit('s3__suple')" aria-label="Ver criterios">?</button>
   </div>
   <div class="cpc-row">
-    <button class="cpc-btn cpc-cumple" onclick="selectCPC('s3__suple','cumple',this)">✓ Cumple</button>
-    <button class="cpc-btn cpc-parcial" onclick="selectCPC('s3__suple','parcial',this)">⚠ Parcial</button>
-    <button class="cpc-btn cpc-no" onclick="selectCPC('s3__suple','no',this)">✗ No cumple</button>
+    <button class="cpc-btn cpc-cumple" onclick="selectCPC('s3__suple','cumple',this)">✓ Cumple<span class="cpc-range">85-100</span></button>
+    <button class="cpc-btn cpc-parcial" onclick="selectCPC('s3__suple','parcial',this)">⚠ Parcial<span class="cpc-range">50-84</span></button>
+    <button class="cpc-btn cpc-no" onclick="selectCPC('s3__suple','no',this)">✗ No cumple<span class="cpc-range">0-49</span></button>
     <button class="cpc-btn cpc-na" onclick="selectCPC('s3__suple','na',this)">N/A</button>
   </div>
   <div class="obs-field"><div class="obs-hint">⚠ Describí el problema observado (obligatorio)</div><textarea placeholder="Describí qué se observó..." maxlength="300"></textarea></div>
@@ -715,9 +716,9 @@ textarea{min-height:56px;resize:none;line-height:1.5}
     <button class="crit-toggle" onclick="toggleCrit('s3__otc')" aria-label="Ver criterios">?</button>
   </div>
   <div class="cpc-row">
-    <button class="cpc-btn cpc-cumple" onclick="selectCPC('s3__otc','cumple',this)">✓ Cumple</button>
-    <button class="cpc-btn cpc-parcial" onclick="selectCPC('s3__otc','parcial',this)">⚠ Parcial</button>
-    <button class="cpc-btn cpc-no" onclick="selectCPC('s3__otc','no',this)">✗ No cumple</button>
+    <button class="cpc-btn cpc-cumple" onclick="selectCPC('s3__otc','cumple',this)">✓ Cumple<span class="cpc-range">85-100</span></button>
+    <button class="cpc-btn cpc-parcial" onclick="selectCPC('s3__otc','parcial',this)">⚠ Parcial<span class="cpc-range">50-84</span></button>
+    <button class="cpc-btn cpc-no" onclick="selectCPC('s3__otc','no',this)">✗ No cumple<span class="cpc-range">0-49</span></button>
     <button class="cpc-btn cpc-na" onclick="selectCPC('s3__otc','na',this)">N/A</button>
   </div>
   <div class="obs-field"><div class="obs-hint">⚠ Describí el problema observado (obligatorio)</div><textarea placeholder="Describí qué se observó..." maxlength="300"></textarea></div>
@@ -756,9 +757,9 @@ textarea{min-height:56px;resize:none;line-height:1.5}
     <button class="crit-toggle" onclick="toggleCrit('s4__dem2')" aria-label="Ver criterios">?</button>
   </div>
   <div class="cpc-row">
-    <button class="cpc-btn cpc-cumple" onclick="selectCPC('s4__dem2','cumple',this)">✓ Cumple</button>
-    <button class="cpc-btn cpc-parcial" onclick="selectCPC('s4__dem2','parcial',this)">⚠ Parcial</button>
-    <button class="cpc-btn cpc-no" onclick="selectCPC('s4__dem2','no',this)">✗ No cumple</button>
+    <button class="cpc-btn cpc-cumple" onclick="selectCPC('s4__dem2','cumple',this)">✓ Cumple<span class="cpc-range">85-100</span></button>
+    <button class="cpc-btn cpc-parcial" onclick="selectCPC('s4__dem2','parcial',this)">⚠ Parcial<span class="cpc-range">50-84</span></button>
+    <button class="cpc-btn cpc-no" onclick="selectCPC('s4__dem2','no',this)">✗ No cumple<span class="cpc-range">0-49</span></button>
     <button class="cpc-btn cpc-na" onclick="selectCPC('s4__dem2','na',this)">N/A</button>
   </div>
   <div class="obs-field"><div class="obs-hint">⚠ Describí el problema observado (obligatorio)</div><textarea placeholder="Describí qué se observó..." maxlength="300"></textarea></div>
@@ -774,9 +775,9 @@ textarea{min-height:56px;resize:none;line-height:1.5}
     <button class="crit-toggle" onclick="toggleCrit('s4__chk')" aria-label="Ver criterios">?</button>
   </div>
   <div class="cpc-row">
-    <button class="cpc-btn cpc-cumple" onclick="selectCPC('s4__chk','cumple',this)">✓ Cumple</button>
-    <button class="cpc-btn cpc-parcial" onclick="selectCPC('s4__chk','parcial',this)">⚠ Parcial</button>
-    <button class="cpc-btn cpc-no" onclick="selectCPC('s4__chk','no',this)">✗ No cumple</button>
+    <button class="cpc-btn cpc-cumple" onclick="selectCPC('s4__chk','cumple',this)">✓ Cumple<span class="cpc-range">85-100</span></button>
+    <button class="cpc-btn cpc-parcial" onclick="selectCPC('s4__chk','parcial',this)">⚠ Parcial<span class="cpc-range">50-84</span></button>
+    <button class="cpc-btn cpc-no" onclick="selectCPC('s4__chk','no',this)">✗ No cumple<span class="cpc-range">0-49</span></button>
     <button class="cpc-btn cpc-na" onclick="selectCPC('s4__chk','na',this)">N/A</button>
   </div>
   <div class="obs-field"><div class="obs-hint">⚠ Describí el problema observado (obligatorio)</div><textarea placeholder="Describí qué se observó..." maxlength="300"></textarea></div>
@@ -800,9 +801,9 @@ textarea{min-height:56px;resize:none;line-height:1.5}
     <button class="crit-toggle" onclick="toggleCrit('s4b__trast')" aria-label="Ver criterios">?</button>
   </div>
   <div class="cpc-row">
-    <button class="cpc-btn cpc-cumple" onclick="selectCPC('s4b__trast','cumple',this)">✓ Cumple</button>
-    <button class="cpc-btn cpc-parcial" onclick="selectCPC('s4b__trast','parcial',this)">⚠ Parcial</button>
-    <button class="cpc-btn cpc-no" onclick="selectCPC('s4b__trast','no',this)">✗ No cumple</button>
+    <button class="cpc-btn cpc-cumple" onclick="selectCPC('s4b__trast','cumple',this)">✓ Cumple<span class="cpc-range">85-100</span></button>
+    <button class="cpc-btn cpc-parcial" onclick="selectCPC('s4b__trast','parcial',this)">⚠ Parcial<span class="cpc-range">50-84</span></button>
+    <button class="cpc-btn cpc-no" onclick="selectCPC('s4b__trast','no',this)">✗ No cumple<span class="cpc-range">0-49</span></button>
     <button class="cpc-btn cpc-na" onclick="selectCPC('s4b__trast','na',this)">N/A</button>
   </div>
   <div class="obs-field"><div class="obs-hint">⚠ Describí el problema observado (obligatorio)</div><textarea placeholder="Describí qué se observó..." maxlength="300"></textarea></div>
@@ -818,9 +819,9 @@ textarea{min-height:56px;resize:none;line-height:1.5}
     <button class="crit-toggle" onclick="toggleCrit('s4b__comp')" aria-label="Ver criterios">?</button>
   </div>
   <div class="cpc-row">
-    <button class="cpc-btn cpc-cumple" onclick="selectCPC('s4b__comp','cumple',this)">✓ Cumple</button>
-    <button class="cpc-btn cpc-parcial" onclick="selectCPC('s4b__comp','parcial',this)">⚠ Parcial</button>
-    <button class="cpc-btn cpc-no" onclick="selectCPC('s4b__comp','no',this)">✗ No cumple</button>
+    <button class="cpc-btn cpc-cumple" onclick="selectCPC('s4b__comp','cumple',this)">✓ Cumple<span class="cpc-range">85-100</span></button>
+    <button class="cpc-btn cpc-parcial" onclick="selectCPC('s4b__comp','parcial',this)">⚠ Parcial<span class="cpc-range">50-84</span></button>
+    <button class="cpc-btn cpc-no" onclick="selectCPC('s4b__comp','no',this)">✗ No cumple<span class="cpc-range">0-49</span></button>
     <button class="cpc-btn cpc-na" onclick="selectCPC('s4b__comp','na',this)">N/A</button>
   </div>
   <div class="obs-field"><div class="obs-hint">⚠ Describí el problema observado (obligatorio)</div><textarea placeholder="Describí qué se observó..." maxlength="300"></textarea></div>
@@ -836,9 +837,9 @@ textarea{min-height:56px;resize:none;line-height:1.5}
     <button class="crit-toggle" onclick="toggleCrit('s4b__dep')" aria-label="Ver criterios">?</button>
   </div>
   <div class="cpc-row">
-    <button class="cpc-btn cpc-cumple" onclick="selectCPC('s4b__dep','cumple',this)">✓ Cumple</button>
-    <button class="cpc-btn cpc-parcial" onclick="selectCPC('s4b__dep','parcial',this)">⚠ Parcial</button>
-    <button class="cpc-btn cpc-no" onclick="selectCPC('s4b__dep','no',this)">✗ No cumple</button>
+    <button class="cpc-btn cpc-cumple" onclick="selectCPC('s4b__dep','cumple',this)">✓ Cumple<span class="cpc-range">85-100</span></button>
+    <button class="cpc-btn cpc-parcial" onclick="selectCPC('s4b__dep','parcial',this)">⚠ Parcial<span class="cpc-range">50-84</span></button>
+    <button class="cpc-btn cpc-no" onclick="selectCPC('s4b__dep','no',this)">✗ No cumple<span class="cpc-range">0-49</span></button>
     <button class="cpc-btn cpc-na" onclick="selectCPC('s4b__dep','na',this)">N/A</button>
   </div>
   <div class="obs-field"><div class="obs-hint">⚠ Describí el problema observado (obligatorio)</div><textarea placeholder="Describí qué se observó..." maxlength="300"></textarea></div>
@@ -1127,9 +1128,9 @@ function makeYesNoItems(containerId){
         <button class="crit-toggle${val?' open':''}" onclick="toggleCrit('adm__${item}')" aria-label="Ver criterios">?</button>
       </div>
       <div class="cpc-row">
-        <button class="cpc-btn cpc-cumple${val==='cumple'?' selected':''}" onclick="selectAdm('${k}','cumple',this)">✓ Cumple</button>
-        <button class="cpc-btn cpc-parcial${val==='parcial'?' selected':''}" onclick="selectAdm('${k}','parcial',this)">⚠ Parcial</button>
-        <button class="cpc-btn cpc-no${val==='no'?' selected':''}" onclick="selectAdm('${k}','no',this)">✗ No cumple</button>
+        <button class="cpc-btn cpc-cumple${val==='cumple'?' selected':''}" onclick="selectAdm('${k}','cumple',this)">✓ Cumple<span class="cpc-range">85-100</span></button>
+        <button class="cpc-btn cpc-parcial${val==='parcial'?' selected':''}" onclick="selectAdm('${k}','parcial',this)">⚠ Parcial<span class="cpc-range">50-84</span></button>
+        <button class="cpc-btn cpc-no${val==='no'?' selected':''}" onclick="selectAdm('${k}','no',this)">✗ No cumple<span class="cpc-range">0-49</span></button>
         <button class="cpc-btn cpc-na${val==='na'?' selected':''}" onclick="selectAdm('${k}','na',this)">N/A</button>
       </div>
     </div>`;
